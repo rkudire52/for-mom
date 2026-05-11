@@ -3,97 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cool Interface</title>
+    <title>Happy Mother's Day</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        :root {
+            --primary-pink: #ff4d6d;
+            --soft-pink: #ffccd5;
         }
 
         body {
-            background: #0f0c29;
-            background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #000000);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle, #fff0f3 0%, #ffccd5 100%);
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            font-family: 'Georgia', serif;
         }
 
-        /* Smooth background animation */
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Glassmorphism Card */
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 50px;
+        /* The Greeting Card */
+        .greeting-card {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
             text-align: center;
-            color: white;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
-            max-width: 500px;
-            transform: translateY(0);
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
+            z-index: 10;
+            border: 2px solid white;
+            backdrop-filter: blur(5px);
+            animation: float 3s ease-in-out infinite;
         }
 
         h1 {
+            color: var(--primary-pink);
             font-size: 3rem;
             margin-bottom: 10px;
-            background: linear-gradient(to right, #00dbde, #fc00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
         p {
-            color: #ccc;
-            line-height: 1.6;
-            margin-bottom: 30px;
+            color: #590d22;
+            font-size: 1.2rem;
+            font-style: italic;
         }
 
-        /* Neon Glow Button */
-        .btn {
-            text-decoration: none;
-            color: white;
-            padding: 12px 30px;
-            border: 2px solid #00dbde;
-            border-radius: 50px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
+        /* Floating Animation for Card */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
 
-        .btn:hover {
-            background: #00dbde;
-            box-shadow: 0 0 20px #00dbde, 0 0 60px #00dbde;
-            color: #000;
+        /* Rose Petal / Flower Style */
+        .rose {
+            position: absolute;
+            top: -50px;
+            user-select: none;
+            pointer-events: none;
+            z-index: 5;
+            font-size: 2rem;
+            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1));
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg) translateX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg) translateX(50px);
+                opacity: 0.3;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <h1>Future.io</h1>
-        <p>Experience the next generation of web design with glassmorphism, animated gradients, and high-performance layouts.</p>
-        <a href="#" class="btn">Explore Now</a>
+    <div class="greeting-card">
+        <h1>Happy Mother's Day</h1>
+        <p>To the world's best Mom,<br>Thank you for everything you do!</p>
     </div>
 
+    <script>
+        function createRose() {
+            const roses = ['🌹', '🌸', '🌷', '💖', '✨'];
+            const rose = document.createElement('div');
+            rose.classList.add('rose');
+            
+            // Randomize appearance
+            rose.innerText = roses[Math.floor(Math.random() * roses.length)];
+            rose.style.left = Math.random() * 100 + "vw";
+            
+            // Randomize size and speed
+            const duration = Math.random() * 3 + 4 + "s";
+            rose.style.animationDuration = duration;
+            rose.style.fontSize = Math.random() * 20 + 20 + "px";
+            
+            document.body.appendChild(rose);
+
+            // Clean up memory after animation finishes
+            setTimeout(() => {
+                rose.remove();
+            }, 7000);
+        }
+
+        // Create a new rose every 300 milliseconds
+        setInterval(createRose, 300);
+    </script>
 </body>
 </html>
